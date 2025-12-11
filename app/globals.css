@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+
+.fbtn:hover{
+    cursor: pointer;
+}
+
+.fbtn {
+    display:flex;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    justify-items: center;
+    user-select: none;
+    font-size: 13px;
+}
