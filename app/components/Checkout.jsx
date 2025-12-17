@@ -13,6 +13,7 @@ export default function CheckoutPage() {
     const [cost, setCost] = useState(0)
     const [paymentBkash, setPaymentBkash] = useState()
     const [paymentNagad, setPaymentNagad] = useState()
+    const [isOrdering, setIsOrdering] = useState(false);
     const [formData, setFormData] = useState({
         name: "", phone: "", email: "", district: "",
         upazila: "", address: "", payment: "cash",
@@ -51,6 +52,8 @@ export default function CheckoutPage() {
             alert("No product in her")
             return
         }
+        if (isOrdering) return;
+        setIsOrdering(true);
         const orderPayload = {
             customerName: formData.name,
             customerPhone: formData.phone,
@@ -98,6 +101,7 @@ export default function CheckoutPage() {
                 }, 2000);
             }
         } catch (error) {
+            setIsOrdering(false);
             toast.error('try againg leter!', {
                     position: "top-right",
                     autoClose: 1000,
@@ -268,7 +272,10 @@ export default function CheckoutPage() {
                             <span>Grand Total:</span>
                             <span>৳{totalPrice}</span>
                         </div>
-                        <button type="submit" className="w-full bg-slate-800 text-white font-bold py-4 rounded-md mt-6 hover:bg-black transition-all shadow-md">
+                        <button
+                        disabled={isOrdering}
+                         type="submit" 
+                         className="w-full bg-slate-800 text-white font-bold py-4 rounded-md mt-6 hover:bg-black transition-all shadow-md">
                             CONFIRM ORDER
                         </button>
                     </div>
